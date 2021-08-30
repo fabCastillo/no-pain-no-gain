@@ -1,50 +1,70 @@
 const auth = require('../../../auth');
 const bcrypt = require('bcrypt');
-const TABLE = 'auth';
+const error = require('../../../utils/error');
+const { Op } = require('sequelize');
 
-module.exports = ( store = require('../../../store/dummy')) => {
+module.exports = function({ Auth, User, sequelize }) {
 
-    async function login({ username, password }) {
+    async function login({ username_or_email, password }) {
+
+        let dataUser = await Auth.findOne({
+            include: [{
+                model: User,
+                as: "users"
+            }],
+            where: { 
+                [Op.or]: [
+                    { username: username_or_email  }, 
+                    { email: username_or_email  }
+                ]
+            }
+        });
+
+        if (!dataUser) {
+            throw error('Not Found', 200);
+        }
+
+        dataUser = JSON.parse(JSON.stringify(dataUser));
         
-        const user =  await store.query(TABLE, { username, password });
 
-        bcrypt.compare(password, user.password)
-            .then( (sonIguales) => {
-                
-                if (!sonIguales){
+        const isValid = await bcrypt.compare(password, dataUser.password);
 
-                    throw new Error( 'Información Invalida', 401 );
-                
-                }
-                
-                return auth.sign(user);
+        if (!isValid) {
+            throw error('Informacion Invalida', 401);
+        }
 
-            });
-        
-    };
-    
-    async function upsert(data){
-        
-        const authData = {
-            id: data.id
-        };
+        const scopes = await sequelize.query(`
+            SELECT
+                pr.profile,
+                pm.name as "description",
+                pm.slug
+            FROM profiles pr
+            INNER JOIN users ON ( pr.id = users.profileId )
+            INNER JOIN permissions_profiles pp ON ( pr.id = pp.profileId )
+            INNER JOIN permissions pm ON ( pp.permissionId = pm.id )
+            WHERE users.id = :userId`, {
+                replacements: {
+                    userId: dataUser.users.id
+                },
+                type: sequelize.QueryTypes.SELECT
+        });
 
-        if(data.username) {
-            authData.username = data.username;
-        };
+        const permission = scopes.map(permission => (permission.slug));
 
-        if(data.password) {
-            authData.password = await bcrypt.hash(data.password, 10);
-        };
+        const user = {
 
-        return store.upsert(TABLE, authData);
+            token: auth.sign({ id: dataUser.users.id }),
+            user: dataUser.users,
+            permission,
+            rol: scopes[0].profile
 
-    };
+        }
+
+        return user;
+    }
 
     return {
+        login
+    }
 
-        login,
-        upsert
-        
-    };
-};
+}
