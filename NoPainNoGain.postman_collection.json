@@ -6,16 +6,381 @@
 	},
 	"item": [
 		{
+			"name": "Cities",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city\": \"armenia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/city/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"city",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/city/bogota",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"city",
+								"bogota"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Collection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/city/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"city",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/city/armenia",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"city",
+								"armenia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city\": \"armenia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/city",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sedes",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sede\": \"aqui\",\r\n    \"cityId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/sede/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sede",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSede",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/sede/Halpines",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sede",
+								"Halpines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Collection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/sede/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sede",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/sede/aqui",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sede",
+								"aqui"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sede\": \"aqui\",\r\n    \"cityId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/sede/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sede",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Users",
 			"item": [
 				{
 					"name": "Register",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMzUzNjAzfQ.QJdH7u7jyJUvHYLfjMOAyN6EYhSV8f4s30UH18zGgI4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Andrés\",\r\n    \"username\": \"AndresCod\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"document\": 123456789,\r\n    \"firstName\": \"Andrés\",\r\n    \"lastName\": \"Castillo\",\r\n    \"email\": \"andres960@hotmail.com\",\r\n    \"username\": \"AndresCod234\",\r\n    \"password\": \"1234\",\r\n    \"profileId\": 1,\r\n    \"sedeId\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,6 +406,16 @@
 				{
 					"name": "Collection",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMzUzNjAzfQ.QJdH7u7jyJUvHYLfjMOAyN6EYhSV8f4s30UH18zGgI4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -62,10 +437,20 @@
 				{
 					"name": "GetUser",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMzUzNjAzfQ.QJdH7u7jyJUvHYLfjMOAyN6EYhSV8f4s30UH18zGgI4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/v1/user/1",
+							"raw": "localhost:3000/api/v1/user/123456789",
 							"host": [
 								"localhost"
 							],
@@ -74,7 +459,7 @@
 								"api",
 								"v1",
 								"user",
-								"1"
+								"123456789"
 							]
 						}
 					},
@@ -83,10 +468,20 @@
 				{
 					"name": "RemoveUser",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/v1/user/2",
+							"raw": "localhost:3000/api/v1/user/321",
 							"host": [
 								"localhost"
 							],
@@ -95,7 +490,47 @@
 								"api",
 								"v1",
 								"user",
-								"2"
+								"321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMwMjk5NzY1fQ.MyR7YUQN3sfRvW1GgUfiweCGGoSzE43B8VElp54BbZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\": 1234567,\r\n    \"firstName\": \"Andres\",\r\n    \"lastName\": \"BBBBBBB\",\r\n    \"email\": \"BBBBBBBB\",\r\n    \"username\": \"BBBBBBBBBB\",\r\n    \"password\": \"BBBBBBBB\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								""
 							]
 						}
 					},
@@ -113,7 +548,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"AndresCod\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"username_or_email\": \"batman\",\r\n    \"password\": \"12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
