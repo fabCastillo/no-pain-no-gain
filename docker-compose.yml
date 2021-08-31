@@ -1,0 +1,32 @@
+version: "3"
+services:
+  database_mysql:
+    image: mysql:8.0
+    container_name: database_mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "nopain_nogain_development"
+      MYSQL_PASSWORD: "123456"
+    volumes:
+      - ./schemas:/var/lib/mysql:rw
+    networks:
+      app-network:
+  nodejs:
+    container_name: prueba-nodejs
+    image: prueba-nodejs
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - database_mysql
+    links:
+      - database_mysql
+    networks:
+      app-network:
+    ports:
+      - "3000:3000"
+networks:
+  app-network:
