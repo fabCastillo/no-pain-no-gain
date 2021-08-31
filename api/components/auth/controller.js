@@ -59,6 +59,12 @@ module.exports = function({ Auth, User, sequelize }) {
             rol: scopes[0].profile
 
         }
+        
+        if (scopes[0].profile !== "Administrador") {
+
+            throw new error('Usuario no permitido', 401);
+
+        }
 
         return user;
     }

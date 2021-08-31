@@ -1,26 +1,39 @@
-const auth = require('../auth');
 const error = require('../../../utils/error');
 
-module.exports = ( { User, Auth } ) => {
-  
-    async function list(){
+module.exports = class User {
 
-        return User.findAll({
+    constructor ({ User, Auth, Sedes, Cities, Profile }) {
+
+        this.userModel = User;
+        this.authModel = Auth;
+        this.sedeModel = Sedes;
+        this.cityModel = Cities;
+        this.profileModel = Profile;
+
+    };
+
+    async list(){
+
+        return this.userModel.findAll({
             attributes: {
                 exclude: [
                     "id",
                     "updatedAt",
                     "authId",
-                    "AuthId"
+                    "AuthId",
+                    "profileId",
+                    "ProfileId",
+                    "sedeId",
+                    "SedeId",
                 ]
             }
         });
 
     };
 
-    async function get( document ){
+    async get( document ){
 
-        return User.findAll({
+        return this.userModel.findAll({
             attributes: {
                 exclude: [
                     "id",
@@ -28,29 +41,44 @@ module.exports = ( { User, Auth } ) => {
                     "AuthId",
                     "authId",
                     "updatedAt",
+                    "profileId",
+                    "ProfileId",
+                    "sedeId",
+                    "SedeId",
                 ]
             },
             include: [{
-                model: Auth,
+                model: this.authModel,
                 attributes: ["userName"]
+            },{
+                model: this.profileModel,
+                attributes: ["profile"]
+            },{
+                model: this.sedeModel,
+                attributes: ["sede"],
+                include: [{
+                    model: this.cityModel,
+                    attributes: ["city"],
+                    
+                }]
             }],
-            where: { document, active: true }
+            where: { document: document, active: true }
         });
 
     };
 
-    async function get_credentials(username) {
+    async get_credentials(username) {
 
-        return Auth.findAll({
+        return this.authModel.findAll({
             attributes: ['id'],
             where: { username, active: true }
         });
 
     }
 
-    async function register(body) {
+    async register(body) {
         
-        const user_exists = await get( body.document );
+        const user_exists = await this.get( body.document );
         if (user_exists.length) {
             throw error('Usuario ya registrado', 401);
         }
@@ -60,6 +88,8 @@ module.exports = ( { User, Auth } ) => {
             document: body.document,
             firstName: body.firstName,
             lastName: body.lastName,
+            profileId: body.profileId,
+            sedeId: body.sedeId
 
         }
 
@@ -69,24 +99,25 @@ module.exports = ( { User, Auth } ) => {
             password: body.password
         }
 
-        const credentials_exists = await get_credentials ( body.username );
+        const credentials_exists = await this.get_credentials ( body.username );
         if (credentials_exists.length) {
             throw error('userName ya en uso', 401);
         }
 
-        const credentials_registered = await Auth.create(credentials)
+        const credentials_registered = await this.authModel.create(credentials)
         let id_credential = JSON.parse(JSON.stringify(credentials_registered)).id;
         
         user.authId = id_credential
-        const user_registered = await User.create(user);
+        const user_registered = await this.userModel.create(user);
 
         return JSON.parse(JSON.stringify(user_registered));
 
     };
 
-    async function update(body){
+    async update(body){
+
         const document = body.document;
-        const user_exists = await get( body.document );
+        const user_exists = await this.get( body.document );
         if (!user_exists.length) {
             throw error('No existe el usuario', 401);
         }
@@ -97,7 +128,7 @@ module.exports = ( { User, Auth } ) => {
 
         let user_update = {
             firstName: body.firstName,
-            lastName: body.lastName,
+            lastName: body.lastName
         };
 
         let credential_update = {
@@ -106,38 +137,26 @@ module.exports = ( { User, Auth } ) => {
             password: body.password
         };
 
-        Auth.update( credential_update, { where: { userName, active: true } });
-        User.update( user_update, {where: { document, active: true } });
+        this.authModel.update( credential_update, { where: { userName, active: true } });
+        this.userModel.update( user_update, {where: { document, active: true } });
 
         return "Actualizados correctamente";
 
     };
 
-    async function remove( document ){
+    async remove( document ){
         
-        const user_exists = await get( document );
+        const user_exists = await this.get( document );
         if (!user_exists.length) {
             throw error('No existe el usuario', 401);
         }
 
         let userName_credential = JSON.parse(JSON.stringify(user_exists[0])).Auth.userName;
-        await Auth.update( { active: false }, { where: { userName: userName_credential } } );
-        await User.update( { active: false }, { where: { document } } );
+        await this.authModel.update( { active: false }, { where: { userName: userName_credential } } );
+        await this.userModel.update( { active: false }, { where: { document } } );
 
         return "Eliminado exitosamente";
 
     };
 
-    function sum(a, b) {
-        return a + b;
-    }
-
-    return {
-        list,
-        get,
-        register,
-        update,
-        remove,
-        sum
-    };
 };

@@ -12,13 +12,13 @@ require('../../../auth/jwt');
 
 router.get('/', 
     passport.authenticate('jwt', { session: false }), 
-    validationHandler('read_users'),
+    validationHandler('read_sede'),
     collection
 );
 
-router.get('/:document', 
+router.get('/:sede', 
     passport.authenticate('jwt', { session: false }), 
-    validationHandler('read_user'), 
+    validationHandler('read_sede'), 
     get
 );
 
@@ -27,14 +27,16 @@ router.post('/',
     validationHandler('create_users'),
     register
 );
+
 router.put('/', 
     passport.authenticate('jwt', { session: false }), 
-    validationHandler('update_users'),    
+    validationHandler('update_sede'),    
     update
 );
-router.delete('/:document', 
+
+router.delete('/:sede', 
     passport.authenticate('jwt', { session: false }), 
-    validationHandler('delete_users'),
+    validationHandler('delete_sede'),
     remove
 );
 
@@ -45,7 +47,7 @@ function collection (req, res, next) {
 }
 
 function get(req, res, next) {
-    controller.get(req.params.document)
+    controller.get(req.params.sede)
         .then( (user) => response.success(req, res, user, 200) )
         .catch( next );
 }
@@ -63,7 +65,7 @@ function update(req, res, next) {
 }
 
 function remove(req, res, next) {
-    controller.remove(req.params.document)
+    controller.remove(req.params.sede)
         .then( (resp) => response.success(req, res, resp, 200) )
         .catch( next );
 }

@@ -1,5 +1,5 @@
-const User = require('./controller');
+const City = require('./controller');
 const store = require('../../../store/models');
 
 // INYECTAMOS EL DATABASE
-module.exports = new User( store );
+module.exports = new City( store );
